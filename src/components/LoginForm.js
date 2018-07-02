@@ -5,12 +5,10 @@ import { Button, Form, Grid, Header,
   Message, Segment }
    from 'semantic-ui-react'
 
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { login } from '../reducers/loginReducer'
-import { userConstants } from '../constants/user.constants';
-//import Register from './RegisterForm'
-import store from '../store'
+
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -31,34 +29,22 @@ class LoginForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+
   handleClick = (e) => {
     e.preventDefault()
-    console.log('Logging as', this.state.username)
-    const { username, password } = this.state
-
-    this.props.login(username, password)
+   
     this.setState({ submitted: true })
-   /*  const { username, password } = this.state
+     
+    const { username, password } = this.state
     if(username && password){
       this.props.login({ username, password })
-      this.setState({ submitted: true })
-      this.props.history.push('/')
-    }//else username or password wrongeja */
+    }
   }
 
   render() {
     const { submitted } = this.state
-    console.log(
-     store.getState())
-   if (store.getState().loginReducer.user && submitted) {
-      //console.log('SUER', window.localStorage.getItem(userConstants.LOCAL_STORAGE))
-      //if (window.localStorage.getItem(userConstants.LOCAL_STORAGE)){
-          return <Redirect to='/' />
-      //}
-      //if loggedIn -> Redirect, else ilmoita virheestä 
-      //return <Redirect to='/' />
-    //}
-   }
+    const { username, password } = this.state
+    
     return (
       <div className='login-form'>
         <div>

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+//import { BrowserRouter as Router } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 
 import store from './store'
 import logo from './logo.svg'
 import './App.css'
 
+import { history } from './_helpers/history'
 import MainMenu from './components/MainMenu'
 
 const Home = () => (
@@ -18,13 +20,13 @@ const Home = () => (
 
 class App extends Component {
   componentDidMount = () => {
-    console.log(store.getState())
+    //console.log(store.getState())
     
   }
   render() {
     return (
       <Container>
-        <Router>
+        <Router history={history}>
           <MainMenu />
         </Router>
       </Container>

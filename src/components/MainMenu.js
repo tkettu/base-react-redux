@@ -48,7 +48,7 @@ const MainMenu = () => (
     </Menu>
     <div>
       <Route exact path="/" render={() => <Home />} />
-      <Route path="/login" render={() => <LoginForm />} />
+      <Route path="/login" render={({ history }) => <LoginForm history={history} />} />
       <Route path="/register" render={() => <RegisterForm />} />
       <Route path="/logout" render={() =>  <Logout /> } />
 

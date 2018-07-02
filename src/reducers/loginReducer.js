@@ -1,7 +1,6 @@
 import userService from '../services/user'
 import { userConstants } from '../constants/user.constants'
 import { history } from '../_helpers/history'
-import { Redirect } from 'react-router-dom'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -34,7 +33,7 @@ const failure = (error) => ({ type: userConstants.LOGIN_FAILURE, error })
 
 const logout_success = () => ({ type: userConstants.LOGOUT })
 
-export const login = (username, password) => {
+export const login = ({username, password}) => {
   console.log(username, password)
   
   return dispatch => {
