@@ -1,4 +1,4 @@
-import userService from '../services/user'
+import loginService from '../services/login'
 import { userConstants } from '../constants/user.constants'
 import { history } from '../_helpers/history'
 
@@ -40,7 +40,7 @@ export const login = ({username, password}) => {
 
     dispatch(request(username))
     //const user = 
-    userService.login(
+    loginService.login(
       username,
       password
     )

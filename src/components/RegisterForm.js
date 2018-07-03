@@ -1,8 +1,11 @@
 import React from 'react'
 
+import { connect } from 'react-redux'
 import { Button, Form, Grid, Header,
   Message, Segment }
    from 'semantic-ui-react'
+
+import { register } from '../reducers/userReducer'
 
 class RegisterForm extends React.Component {
   constructor(props) {
@@ -26,8 +29,16 @@ class RegisterForm extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault()
-    console.log('Logging')
     
+    const { username, password, password2 } = this.state
+
+    if(username && password===password2){
+      const user = {
+        username,
+        password
+      }
+      this.props.register(user)
+    }
    /*  const { username, password } = this.state
     if(username && password){
       this.props.login({ username, password })
@@ -65,7 +76,7 @@ class RegisterForm extends React.Component {
                       fluid 
                       icon='user'
                       iconPosition='left'
-                      placeholder='E-mail address' />
+                      placeholder='Username' />
                     <Form.Input
                       name='password'
                       onChange={this.handleLoginFieldChange}
@@ -98,4 +109,7 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default RegisterForm
+export default connect(
+  null,
+  { register }
+)(RegisterForm)
