@@ -20,6 +20,19 @@ const Home = () => (
   </div>
 )
 
+const UserMenu = () => (
+  <Menu.Menu position="right">
+    <Menu.Item>
+      {JSON.parse((window.localStorage
+        .getItem(userConstants.LOCAL_STORAGE))).username}
+    </Menu.Item>
+    <Menu.Item as={Link} to="/logout" >
+        logout
+    </Menu.Item>
+  </Menu.Menu>
+)
+
+
 const MainMenu = () => (
   <div>
     <Menu inverted>
@@ -35,10 +48,10 @@ const MainMenu = () => (
       <Menu.Item as={Link} to="/tab3" >
         T3
       </Menu.Item>
+      
+
       {window.localStorage.getItem(userConstants.LOCAL_STORAGE) ? 
-        <Menu.Item position="right" as={Link} to="/logout" >
-        logout
-        </Menu.Item>
+        <UserMenu />
         :
         <Menu.Item position="right" as={Link} to="/login" >
         login
