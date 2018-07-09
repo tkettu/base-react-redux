@@ -9,12 +9,14 @@ const baseUrl = '/api/login'
   return response.data
 } */
 
-const login = async (username, password) => {
-  const credentials = {
+const login = async (credentials) => {
+  /* const credentials = {
     username,
     password
-  }
+  } */
   const response = await axios.post(baseUrl, credentials)
+  console.log(response.data)
+   
   return response.data
 }
 

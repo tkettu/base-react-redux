@@ -8,6 +8,8 @@ import { Button, Form, Grid, Header,
 import { Link } from 'react-router-dom'
 
 import { login } from '../reducers/loginReducer'
+import Notification from './Notification';
+import store from '../store';
 
 
 class LoginForm extends React.Component {
@@ -20,7 +22,8 @@ class LoginForm extends React.Component {
     this.state = {
       username: '',
       password: '',
-      submitted: false
+      submitted: false,
+      //error: null
     }
   }
 
@@ -44,9 +47,13 @@ class LoginForm extends React.Component {
   render() {
     const { submitted } = this.state
     const { username, password } = this.state
-    
+    console.log(store.getState().messageReducer)
+    const msg = store.getState().messageReducer === null ?
+                null :
+                store.getState().messageReducer.message
     return (
       <div className='login-form'>
+        
         <div>
         <style>{`
               body > div,
@@ -60,6 +67,8 @@ class LoginForm extends React.Component {
                 <Header as='h2' color='teal' textAlign='center'>
                   {/*<Image src='/logo.png' />*/} Log-in to your account
                 </Header>
+                <Notification message={msg} />
+                {submitted ? console.log('ROKI') : console.log('EI ROKI')}
                 <Form size='large'>
                   <Segment stacked>
                     <Form.Input 

@@ -1,6 +1,8 @@
 import loginService from '../services/login'
 import { userConstants } from '../constants/user.constants'
 import { history } from '../_helpers/history'
+import { errorMsg } from './messageReducer'
+
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -18,6 +20,8 @@ const reducer = (state = {}, action) => {
               user: action.data
               }
     case userConstants.LOGIN_FAILURE:
+      console.log('SALASANA TAI USERNAME VÄÄRIN')
+      
       return {}
     case userConstants.LOGOUT:
       window.localStorage.clear()
@@ -35,14 +39,17 @@ const logout_success = () => ({ type: userConstants.LOGOUT })
 
 export const login = ({username, password}) => {
   console.log(username, password)
-  
+  const credentials = {username, password}
   return dispatch => {
 
     dispatch(request(username))
     //const user = 
-    loginService.login(
+    /* loginService.login(
       username,
       password
+    ) */
+    loginService.login(
+      credentials
     )
       .then(
         user => {
@@ -51,6 +58,8 @@ export const login = ({username, password}) => {
         },
         error => {
           dispatch(failure(error))
+          console.log(error)
+          dispatch(errorMsg('vaarin'))
         }
       )  
   }
