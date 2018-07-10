@@ -10,6 +10,7 @@ import './App.css'
 
 import { history } from './_helpers/history'
 import MainMenu from './components/MainMenu'
+import { clearMsg } from './reducers/messageReducer'
 
 const Home = () => (
   <div>
@@ -19,6 +20,15 @@ const Home = () => (
 )
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    history.listen((location, action) => {
+      console.log('CLEARETAAN MESSAGET ')
+      
+      props.clearMsg()
+    })
+  }
   componentDidMount = () => {
     //console.log(store.getState())
     
@@ -35,5 +45,6 @@ class App extends Component {
 }
 
 export default connect(
-  null
+  null,
+  { clearMsg }
 )(App)

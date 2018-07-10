@@ -18,6 +18,8 @@ const reducer = (state=initialState, action) => {
         type: 'message-error',
         message: action.message
       }
+    case messageConstants.CLEAR:
+      return null
     default:
       return state
   }
@@ -39,6 +41,16 @@ export const errorMsg = (message) => {
     dispatch({
       type: messageConstants.ERROR,
       message
+    })
+  }
+}
+
+export const clearMsg = () => {
+  console.log('CLEARETAAN')
+  
+  return dispatch => {
+    dispatch({
+      type: messageConstants.CLEAR
     })
   }
 }
