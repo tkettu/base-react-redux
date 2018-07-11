@@ -4,20 +4,12 @@ import { connect } from 'react-redux'
 import { Router } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 
-import store from './store'
-import logo from './logo.svg'
 import './App.css'
 
 import { history } from './_helpers/history'
 import MainMenu from './components/MainMenu'
 import { clearMsg } from './reducers/messageReducer'
 
-const Home = () => (
-  <div>
-    KOTI
-    {store.getState()}
-  </div>
-)
 
 class App extends Component {
   constructor(props) {
@@ -35,7 +27,7 @@ class App extends Component {
   }
   render() {
     return (
-      <Container>
+      <Container>   
         <Router history={history}>
           <MainMenu />
         </Router>

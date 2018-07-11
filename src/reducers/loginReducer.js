@@ -8,7 +8,7 @@ const reducer = (state = {}, action) => {
   switch (action.type) {
     case userConstants.LOGIN_REQUEST:
       return {
-        //loggingIn: true,
+        loggingIn: true,
         username: action.data
       }      
     case userConstants.LOGIN_SUCCESS:
@@ -16,16 +16,18 @@ const reducer = (state = {}, action) => {
         userConstants.LOCAL_STORAGE,
         JSON.stringify(action.data))
       return {
+              loggingIn: false,
               loggedIn: true,
               user: action.data
               }
     case userConstants.LOGIN_FAILURE:
-      console.log('SALASANA TAI USERNAME VÄÄRIN')
-      
-      return {}
+      return {loggingIn: false}
     case userConstants.LOGOUT:
       window.localStorage.clear()
-      return {}
+      return {
+              loggingIn: false,
+              loggedIn: false
+            }
     default:
       return state
   }
@@ -43,11 +45,6 @@ export const login = ({username, password}) => {
   return dispatch => {
 
     dispatch(request(username))
-    //const user = 
-    /* loginService.login(
-      username,
-      password
-    ) */
     loginService.login(
       credentials
     )

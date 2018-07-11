@@ -16,9 +16,6 @@ class LoginForm extends React.Component {
   constructor(props) {
     super(props)
 
-    //this.props.dispatch(logout)
-    //this.props.logout()
-
     this.state = {
       username: '',
       password: '',
@@ -46,14 +43,13 @@ class LoginForm extends React.Component {
 
   render() {
     const { submitted } = this.state
-    const { username, password } = this.state
-    console.log(store.getState().messageReducer)
-    const msg = store.getState().messageReducer === null ?
-                null :
-                store.getState().messageReducer.message
+   
+    /* if (this.props.loggingIn){
+       console.log('VAaRIN LOGATTU')
+       return null
+    }  */
     return (
       <div className='login-form'>
-        
         <div>
         <style>{`
               body > div,
@@ -65,10 +61,9 @@ class LoginForm extends React.Component {
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as='h2' color='teal' textAlign='center'>
-                  {/*<Image src='/logo.png' />*/} Log-in to your account
+                  {/*<Image src='/logo.png' />*/} Kirjaudu
                 </Header>
-                <Notification message={msg} />
-                {submitted ? console.log('ROKI') : console.log('EI ROKI')}
+                <Notification />
                 <Form size='large'>
                   <Segment stacked>
                     <Form.Input 
@@ -89,8 +84,10 @@ class LoginForm extends React.Component {
                     />
     
                     <Button onClick={this.handleClick} color='teal' fluid size='large'>
-                      Login
+                      {this.props.loggingIn ? 'Kirjaudutaan...' : 'Kirjaudu'}
                     </Button>
+                      {this.props.loggingIn && <p> Kirjaudutaan... </p>}
+                    {/*store.getState().loginReducer.loggingIn ? <p>logging..</p> : <p />*/}
                   </Segment>
                 </Form>
                 <Message>
@@ -104,7 +101,13 @@ class LoginForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    loggingIn: store.getState().loginReducer.loggingIn
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { login }
 )(LoginForm)
