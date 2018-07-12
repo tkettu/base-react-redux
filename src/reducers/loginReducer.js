@@ -1,8 +1,9 @@
 import loginService from '../services/login'
 import { userConstants } from '../constants/user.constants'
 import { history } from '../_helpers/history'
-import { errorMsg } from './messageReducer'
+import { errorMsg, successMsg, clearMsg } from './messageReducer'
 
+const timeout = 5000
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -52,11 +53,18 @@ export const login = ({username, password}) => {
         user => {
           dispatch(success(user))
           history.push('/')
+          dispatch(successMsg(`Tervetuloa ${user.username}`))
+          setTimeout(() => {
+            dispatch(clearMsg())
+          }, timeout)
         },
         error => {
           dispatch(failure(error))
           console.log(error)
           dispatch(errorMsg(JSON.stringify(error.response.data.error)))
+          setTimeout(() => {
+            dispatch(clearMsg())
+          }, timeout)
         }
       )  
   }

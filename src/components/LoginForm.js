@@ -28,7 +28,7 @@ const Login = ({ loggingIn=false, handleChange, handleSubmit }) => (
               {/*<Image src='/logo.png' />*/} Kirjaudu
             </Header>
             <Notification />
-            <Form size='large'>
+            <Form size='large' loading={loggingIn}>
               <Segment stacked>
                 <Form.Input
                   name='username'
@@ -48,9 +48,9 @@ const Login = ({ loggingIn=false, handleChange, handleSubmit }) => (
                 />
 
                 <Button onClick={handleSubmit} color='teal' fluid size='large'>
-                  {loggingIn ? 'Kirjaudutaan...' : 'Kirjaudu'}
+                  Kirjaudu
                 </Button>
-                {loggingIn && <LoadingMessage />}
+                
               </Segment>
             </Form>
             <Message>
@@ -60,15 +60,6 @@ const Login = ({ loggingIn=false, handleChange, handleSubmit }) => (
         </Grid>
     </div>
   </div>
-)
-
-const LoadingMessage = () => (
-  <Message icon>
-    <Icon name='circle outline' loading />
-      <Message.Content>
-        Kirjaudutaan...
-      </Message.Content>
-  </Message>
 )
 
 class LoginForm extends React.Component {

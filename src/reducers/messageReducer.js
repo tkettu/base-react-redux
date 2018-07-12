@@ -21,7 +21,7 @@ const reducer = (state=initialState, action) => {
   }
 }
 
-export const success = (message) => {
+export const successMsg = (message) => {
   return dispatch => {
     dispatch({
       type: messageConstants.SUCCESS,
@@ -38,11 +38,7 @@ export const errorMsg = (message) => {
       type: messageConstants.ERROR,
       message
     })
-    setTimeout(() => {
-      dispatch({
-        type: messageConstants.CLEAR
-      })
-    }, 5000);
+    
   }
 }
 

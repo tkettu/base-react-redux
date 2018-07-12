@@ -5,6 +5,7 @@ import { Menu } from 'semantic-ui-react'
 
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
+import Notification from './Notification'
 //import store from '../store'
 
 import Tab1 from './Tab1'
@@ -16,6 +17,7 @@ import Logout from '../_helpers/Logout';
 
 const Home = () => (
   <div>
+    <Notification />
     KOTI
   </div>
 )
