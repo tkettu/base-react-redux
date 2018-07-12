@@ -2,7 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 import { Button, Form, Grid, Header,
-  Message, Segment }
+  Message, Segment, Icon }
    from 'semantic-ui-react'
 
 import { Link } from 'react-router-dom'
@@ -50,7 +50,7 @@ const Login = ({ loggingIn=false, handleChange, handleSubmit }) => (
                 <Button onClick={handleSubmit} color='teal' fluid size='large'>
                   {loggingIn ? 'Kirjaudutaan...' : 'Kirjaudu'}
                 </Button>
-                  {loggingIn && <p> Kirjaudutaan... </p>}
+                {loggingIn && <LoadingMessage />}
               </Segment>
             </Form>
             <Message>
@@ -62,6 +62,14 @@ const Login = ({ loggingIn=false, handleChange, handleSubmit }) => (
   </div>
 )
 
+const LoadingMessage = () => (
+  <Message icon>
+    <Icon name='circle outline' loading />
+      <Message.Content>
+        Kirjaudutaan...
+      </Message.Content>
+  </Message>
+)
 
 class LoginForm extends React.Component {
   constructor(props) {

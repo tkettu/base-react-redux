@@ -6,12 +6,12 @@ const reducer = (state=initialState, action) => {
   switch (action.type) {
     case messageConstants.SUCCESS:
       return {
-        type: 'message-success',
+        type: 'success',
         message: action.message
       }
     case messageConstants.ERROR:
       return {
-        type: 'message-error',
+        type: 'error',
         message: action.message
       }
     case messageConstants.CLEAR:
@@ -38,6 +38,11 @@ export const errorMsg = (message) => {
       type: messageConstants.ERROR,
       message
     })
+    setTimeout(() => {
+      dispatch({
+        type: messageConstants.CLEAR
+      })
+    }, 5000);
   }
 }
 

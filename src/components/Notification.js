@@ -2,31 +2,41 @@ import React from 'react'
 import store from '../store'
 import { connect } from 'react-redux'
 
+import { Message } from 'semantic-ui-react'
+
 class Notification extends React.Component {
   constructor(props){
     super(props)
   }
 
   render() {
-    return <Message message={this.props.message} />
+    const { message } = this.props
+
+    return ( message === null ? null :
+      (
+        <Message className={message.type}>
+            {message.message}
+        </Message>
+      )
+    )
   }
 }
 
-const Message = ({ message }) => {
+const MMessage = ({ message }) => {
   return ( message === null ? null :
             (
-              <div className="error">
-                  {message}
-              </div>
+              <Message className={message.type}>
+                  {message.message}
+              </Message>
             )
           )
 }
 
 const mapStateToProps = (state) => {
   return {
-    message: store.getState().messageReducer === null ?
+    message: store.getState().messageReducer /* === null ?
               null :
-              store.getState().messageReducer.message
+              store.getState().messageReducer.message */
   }
 }
 
