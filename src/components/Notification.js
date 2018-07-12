@@ -1,16 +1,14 @@
 import React from 'react'
 import store from '../store'
+import { connect } from 'react-redux'
 
 class Notification extends React.Component {
+  constructor(props){
+    super(props)
+  }
 
   render() {
-    console.log('RENREDING NOTIFICATION')
-    
-    const msg = store.getState().messageReducer === null ?
-                  null :
-                  store.getState().messageReducer.message
-
-    return <Message message={msg} />
+    return <Message message={this.props.message} />
   }
 }
 
@@ -24,4 +22,14 @@ const Message = ({ message }) => {
           )
 }
 
-export default Notification
+const mapStateToProps = (state) => {
+  return {
+    message: store.getState().messageReducer === null ?
+              null :
+              store.getState().messageReducer.message
+  }
+}
+
+export default connect(
+  mapStateToProps
+ )(Notification)

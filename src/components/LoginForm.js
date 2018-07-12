@@ -12,6 +12,57 @@ import Notification from './Notification';
 import store from '../store';
 
 
+const Login = ({ loggingIn=false, handleChange, handleSubmit }) => (
+  <div className='login-form'>
+    <div>
+    <style>{`
+          body > div,
+          body > div > div,
+          body > div > div > div.login-form {
+            height: 100%;
+          }
+        `}</style>
+        <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='teal' textAlign='center'>
+              {/*<Image src='/logo.png' />*/} Kirjaudu
+            </Header>
+            <Notification />
+            <Form size='large'>
+              <Segment stacked>
+                <Form.Input
+                  name='username'
+                  onChange={handleChange}
+                  fluid
+                  icon='user'
+                  iconPosition='left'
+                  placeholder='User name' />
+                <Form.Input
+                  name='password'
+                  onChange={handleChange}
+                  fluid
+                  icon='lock'
+                  iconPosition='left'
+                  placeholder='Password'
+                  type='password'
+                />
+
+                <Button onClick={handleSubmit} color='teal' fluid size='large'>
+                  {loggingIn ? 'Kirjaudutaan...' : 'Kirjaudu'}
+                </Button>
+                  {loggingIn && <p> Kirjaudutaan... </p>}
+              </Segment>
+            </Form>
+            <Message>
+              New to us? <Link to='/register'>Sign up</Link>
+            </Message>
+          </Grid.Column>
+        </Grid>
+    </div>
+  </div>
+)
+
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -32,9 +83,7 @@ class LoginForm extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault()
-   
-    this.setState({ submitted: true })
-     
+
     const { username, password } = this.state
     if(username && password){
       this.props.login({ username, password })
@@ -42,62 +91,10 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { submitted } = this.state
-   
-    /* if (this.props.loggingIn){
-       console.log('VAaRIN LOGATTU')
-       return null
-    }  */
-    return (
-      <div className='login-form'>
-        <div>
-        <style>{`
-              body > div,
-              body > div > div,
-              body > div > div > div.login-form {
-                height: 100%;
-              }
-            `}</style>
-            <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
-              <Grid.Column style={{ maxWidth: 450 }}>
-                <Header as='h2' color='teal' textAlign='center'>
-                  {/*<Image src='/logo.png' />*/} Kirjaudu
-                </Header>
-                <Notification />
-                <Form size='large'>
-                  <Segment stacked>
-                    <Form.Input 
-                      name='username'
-                      onChange={this.handleLoginFieldChange}
-                      fluid 
-                      icon='user'
-                      iconPosition='left'
-                      placeholder='User name' />
-                    <Form.Input
-                      name='password'
-                      onChange={this.handleLoginFieldChange}
-                      fluid
-                      icon='lock'
-                      iconPosition='left'
-                      placeholder='Password'
-                      type='password'
-                    />
     
-                    <Button onClick={this.handleClick} color='teal' fluid size='large'>
-                      {this.props.loggingIn ? 'Kirjaudutaan...' : 'Kirjaudu'}
-                    </Button>
-                      {this.props.loggingIn && <p> Kirjaudutaan... </p>}
-                    {/*store.getState().loginReducer.loggingIn ? <p>logging..</p> : <p />*/}
-                  </Segment>
-                </Form>
-                <Message>
-                  New to us? <Link to='/register'>Sign up</Link>
-                </Message>
-              </Grid.Column>
-           </Grid>
-          </div>
-        </div>
-    )
+    return <Login loggingIn={this.props.loggingIn}
+                handleChange={this.handleLoginFieldChange}
+                handleSubmit={this.handleClick} />
   }
 }
 

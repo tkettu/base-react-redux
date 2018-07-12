@@ -3,8 +3,6 @@ import { messageConstants  } from '../constants/message.constants'
 const initialState = null //'No new messages'
 
 const reducer = (state=initialState, action) => {
-  console.log('MESSAGE', action.type)
-  
   switch (action.type) {
     case messageConstants.SUCCESS:
       return {
@@ -12,8 +10,6 @@ const reducer = (state=initialState, action) => {
         message: action.message
       }
     case messageConstants.ERROR:
-      console.log('ERRORI')
-      
       return {
         type: 'message-error',
         message: action.message
@@ -46,8 +42,6 @@ export const errorMsg = (message) => {
 }
 
 export const clearMsg = () => {
-  console.log('CLEARETAAN')
-  
   return dispatch => {
     dispatch({
       type: messageConstants.CLEAR
