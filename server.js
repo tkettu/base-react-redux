@@ -10,7 +10,8 @@ const router = jsonServer.router('db.json')
 const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 
 server.use(jsonServer.defaults())
-
+server.use(bodyParser.urlencoded({extended: true}))
+server.use(bodyParser.json())
 
 
 const SECRET_KEY='V3R153K9E7'
@@ -28,25 +29,27 @@ const isAuthenticated = ({email, password}) => {
     return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
 }
 
-/*server.post('/api/login', (req, res) => {
+server.post('/api/login', (req, res) => {
     console.log('POST LOGIN')
     //console.log(res)
-    console.log(req.headers)
-    const {email, password} = req.body
-    console.log('POSTATAAN  LOGIN PYYNTÖ', email, password)
-    if (!isAuthenticated({email, password})){
+    //console.log(req.headers)
+    console.log(req.body)
+    const {username, password} = req.body
+    console.log('POSTATAAN  LOGIN PYYNTÖ', username, password)
+    if (!isAuthenticated({username, password})){
         const status = 401
         const message = 'Käyttäjätunnus tai salasana virheellinen'
+        //res.status(status).json({status, message})
         res.status(status).json({status, message})
+        return
     }
-    const access_token = createToken({email, password})
-    res.status(200).json({access_token})
-})*/
+    const access_token = createToken({username, password})
+    console.log(`accessi tokeni ${access_token}`)
+    res.status(200).json({access_token, username})
+})
 
-/*server.use((req,res,next) => {
-    console.log(req.method)
-    console.log(req.headers)
-    console.log(req.headers.authorization)
+server.use((req,res,next) => {
+    console.log('SERVERI USE')
     if (req.headers.authorization === undefined 
         || req.headers.authorization.split(' ')[0] 
         !== 'Bearer'){
@@ -63,7 +66,14 @@ const isAuthenticated = ({email, password}) => {
             const message = 'Error: access_token is not valid'
             res.status(status).json({status, message})
         }
-})*/
+})
+/*
+server.post('/api/login', (req, res) => {
+    console.log('POST login')
+    const status = 401
+    const msg = 'BAD DOG'
+    res.status(status).json({status, msg})
+})
 
 const isAuthorized = (req) => {
     console.log(req)
@@ -78,7 +88,7 @@ server.use((req, res, next) => {
         res.sendStatus(401)
     }
 
-})
+})*/
 
 
 //https://www.techiediaries.com/fake-api-jwt-json-server/
