@@ -60,8 +60,7 @@ export const login = ({username, password}) => {
         },
         error => {
           dispatch(failure(error))
-          console.log(error)
-          dispatch(errorMsg(JSON.stringify(error.response.data.error)))
+          dispatch(errorMsg(JSON.stringify(error.response.data.message)))
           setTimeout(() => {
             dispatch(clearMsg())
           }, timeout)
