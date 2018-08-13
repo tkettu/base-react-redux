@@ -21,7 +21,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "json-server -p3001 db.json",
-    "server-auth": "node server.js"
+    "server-auth": "node server/server.js"
   },
   "proxy": "http://localhost:3001"
 }
