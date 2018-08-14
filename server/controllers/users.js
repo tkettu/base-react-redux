@@ -13,6 +13,7 @@ const addUser = (user) => {
     id: generateId()
   }
   console.log(newUser)
+  console.log("käyttäjät", userdb.users)
   
   userdb.users.push(newUser)
 }

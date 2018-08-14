@@ -5,22 +5,14 @@ import { Menu } from 'semantic-ui-react'
 
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
-import Notification from './Notification'
-//import store from '../store'
 
+import Home from './Home'
 import Tab1 from './Tab1'
 import Tab2 from './Tab2'
 import Tab3 from './Tab3'
 import { userConstants } from '../constants/user.constants';
 import Logout from '../_helpers/Logout';
 
-
-const Home = () => (
-  <div>
-    <Notification />
-    KOTI
-  </div>
-)
 
 const UserMenu = () => (
   <Menu.Menu position="right">

@@ -6,6 +6,7 @@ import { Button, Form, Grid, Header,
    from 'semantic-ui-react'
 
 import { register } from '../reducers/userReducer'
+import Notification from './Notification'
 
 class RegisterForm extends React.Component {
   constructor(props) {
@@ -68,6 +69,7 @@ class RegisterForm extends React.Component {
                 <Header as='h2' color='teal' textAlign='center'>
                   {/*<Image src='/logo.png' />*/} Register
                 </Header>
+                <Notification />
                 <Form size='large'>
                   <Segment stacked>
                     <Form.Input 
