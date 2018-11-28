@@ -5,10 +5,7 @@ import { connect } from 'react-redux'
 import { Message } from 'semantic-ui-react'
 
 class Notification extends React.Component {
-  constructor(props){
-    super(props)
-  }
-
+  
   render() {
     const { message } = this.props
     
