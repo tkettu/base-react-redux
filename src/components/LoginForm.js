@@ -8,8 +8,8 @@ import { Button, Form, Grid, Header,
 import { Link } from 'react-router-dom'
 
 import { login } from '../reducers/loginReducer'
-import Notification from './Notification';
-import store from '../store';
+import Notification from './Notification'
+import store from '../store'
 
 
 const Login = ({ loggingIn=false, handleChange, handleSubmit }) => (

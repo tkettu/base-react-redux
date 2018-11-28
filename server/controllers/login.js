@@ -1,7 +1,8 @@
-const fs = require('fs')
+//const fs = require('fs')
 const jwt = require('jsonwebtoken')
+const db = require('../helpers/dbhelper')
 
-const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
+const userdb = db.userdb//JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 
 const SECRET_KEY='V3R153K9E7'
 const expiresIn = '1h'
